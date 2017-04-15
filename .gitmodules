@@ -1,0 +1,3 @@
+[submodule "Node-Addon-TagBuildrCC"]
+	path = NodeModule
+	url = https://github.com/buzzin0609/Node-Addon-TagBuildrCC.git
