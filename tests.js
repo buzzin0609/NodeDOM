@@ -1,8 +1,9 @@
 const addons = require('./Build/Release/addons');
 const assert = require('assert');
+const { NodeDOM } = require('./nodeDOM');
 const { testr, suite } = require('node-testr');
 
-const { tagbuildr, BrowserDoc } = addons;
+const { tagbuildr } = addons;
 
 suite('testing tagbuildr interface', function() {
 
@@ -120,12 +121,31 @@ suite('testing tagbuildr interface', function() {
 
 });
 
-suite('testing BrowserDoc interface', function() {
+suite('testing NodeDOM class', function() {
 	testr('exists', function() {
-		console.log(BrowserDoc);
-		assert.ok(BrowserDoc);
+		assert.ok(NodeDOM);
 	});
-});
+	
+	testr('class initialises', function() {
+		const nd = new NodeDOM('test', 'test content');
+
+		assert.ok(nd);
+
+		testr('instance renders html, head, and body elements', function() {
+			const { document, head, body } = nd;
+
+			assert.ok(document);
+			assert(document.includes('<html>'));
+
+			assert.ok(head);
+			assert.equal(`<head><title>test</title><meta charset="utf-8" /></head>`, head);
+
+			assert.ok(body);
+			assert.equal(`<body>test content</body>`, body);
+		});
+	});
 
 
+
+})
 
