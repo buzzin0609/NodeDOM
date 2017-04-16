@@ -138,7 +138,7 @@
     "strict_ssl": "true",
     "tag": "latest",
     "tag_version_prefix": "v",
-    "tmp": "C:\\Users\\will0\\AppData\\Local\\Temp",
+    "tmp": "C:\\.babun\\cygwin\\tmp",
     "umask": "0000",
     "unicode": "",
     "unsafe_perm": "true",

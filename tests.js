@@ -2,7 +2,7 @@ const addons = require('./Build/Release/addons');
 const assert = require('assert');
 const { testr, suite } = require('node-testr');
 
-const { tagbuildr } = addons;
+const { tagbuildr, BrowserDoc } = addons;
 
 suite('testing tagbuildr interface', function() {
 
@@ -118,6 +118,13 @@ suite('testing tagbuildr interface', function() {
 	});
 
 
+});
+
+suite('testing BrowserDoc interface', function() {
+	testr('exists', function() {
+		console.log(BrowserDoc);
+		assert.ok(BrowserDoc);
+	});
 });
 
 

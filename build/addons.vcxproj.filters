@@ -48,7 +48,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\NodeModule\TagBuildrModule.cc">
+    <ClCompile Include="..\NodeModule\NodeDOMModule.cc">
       <Filter>..\NodeModule</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\will0\AppData\Roaming\nvm\v7.4.0\node_modules\npm\node_modules\node-gyp\src\win_delay_load_hook.cc">
