@@ -10,7 +10,8 @@ class NodeDOM {
 
 		this.head = tb('head', [
 			tb('title', title),
-			tb('meta|charset=utf-8')
+			tb('meta|charset=utf-8'),
+			tb('meta|name=viewport|content=width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
 		]);
 		this.body = tb('body', content);
 	}

@@ -146,7 +146,7 @@ suite('testing NodeDOM class', function() {
 			assert(document.includes('<html>'));
 
 			assert.ok(head);
-			assert.equal(`<head><title>test</title><meta charset="utf-8" /></head>`, head);
+			assert(head.includes(`<head><title>test</title><meta charset="utf-8" />`));
 
 			assert.ok(body);
 			assert.equal(`<body>test content</body>`, body);
@@ -168,21 +168,20 @@ suite('testing NodeDOM class', function() {
 				nd.appendToHead(tagbuildr('meta|content=test meta tag'));
 
 				assert(nd.head.includes('<meta content="test meta tag" />'));
-				assert.equal(`<head><title>test</title><meta charset="utf-8" /><meta content="test meta tag" /></head>`, nd.head);
 			});
 
 			testr('addScript adds a script tag to head tag', function() {
 				nd.addScript('main.js');
 
 				assert(nd.head.includes(`script`));
-				assert.equal(`<head><title>test</title><meta charset="utf-8" /><meta content="test meta tag" /><script src="main.js"></script></head>`, nd.head);
+				assert(nd.head.includes(`<script src="main.js"></script>`));
 			});
 
 			testr('addStylesheet adds a link tag to head tag', function() {
 				nd.addStylesheet('style.css');
 
 				assert(nd.head.includes('link'));
-				assert.equal(`<head><title>test</title><meta charset="utf-8" /><meta content="test meta tag" /><script src="main.js"></script><link rel="stylesheet" type="text/css" href="style.css" /></head>`, nd.head);
+				assert(nd.head.includes(`<link rel="stylesheet" type="text/css" href="style.css" />`));
 			});
 			
 		});
