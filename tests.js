@@ -40,6 +40,14 @@ suite('testing tagbuildr interface', function() {
 		assert.equal('<h2 id="my-id" class="my-class my-class-2"></h2>', test);
 	});
 
+	testr('self closes correct elements', function() {
+		const img = tagbuildr('img');
+		const meta = tagbuildr('meta');
+
+		assert.equal(`<img />`, img);
+		assert.equal(`<meta />`, meta);
+	});
+
 	testr('attributes are added to the element', function() {
 		const test = tagbuildr('img|src=myimg.jpg|alt=cool img');
 
@@ -132,7 +140,7 @@ suite('testing NodeDOM class', function() {
 		assert.ok(nd);
 
 		testr('instance renders html, head, and body elements', function() {
-			const { document, head, body } = nd;
+			let { document, head, body } = nd;
 
 			assert.ok(document);
 			assert(document.includes('<html>'));
@@ -142,6 +150,20 @@ suite('testing NodeDOM class', function() {
 
 			assert.ok(body);
 			assert.equal(`<body>test content</body>`, body);
+
+			testr('appendTo adds content to tag', function() {
+				body = nd.appendTo(body, 'new');
+
+				assert.equal(`<body>test contentnew</body>`, body);
+			});
+			
+			testr('appendToBody adds content to body tag', function() {
+				nd.appendToBody(tagbuildr('span.new-content', 'hello'));
+
+				assert(nd.body.includes('new-content'));
+				assert.equal('<body>test content<span class="new-content">hello</span></body>', nd.body);
+			});
+			
 		});
 	});
 

@@ -35,16 +35,36 @@ class NodeDOM {
 		}
 
 		throw new ErrorType(`[NodeDOM] Error: ${message}`);
-		return void 0;
 	}
 
-	appendTo(tag, addition) {
-		tag = tag.replace(/<.*>(.[^<\/]*)<\/.*>/, function(match, content) {
+	appendTo(tagMarkup, addition) {
+		return tagMarkup.replace(/<.*>(.[^<\/]*)<\/.*>/, function(match, content) {
 			const newContent = content + addition;
 
 			return match.replace(content, newContent);
 		});
 	}
+
+	appendToBody(addition) {
+		this.body = this.appendTo(this.body, addition);
+		return void 0;
+	}
+
+	appendToHead(addition) {
+		this.head = this.appendTo(this.head, addition);
+		return void 0;
+	}
+	
+	addScript(url, async = false) {
+		this.appendToHead(tb(`script|src=${url}${async ? '|async=async' : ''}`));
+		return void 0;
+	}
+	
+	addStylesheet(url) {
+		this.appendToHead(tb(`link|rel=stylesheet|type=text/css|href=${url}`));
+		return void 0;
+	}
+	
 
 }
 
