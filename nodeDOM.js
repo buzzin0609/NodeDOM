@@ -13,7 +13,10 @@ class NodeDOM {
 			tb('meta|charset=utf-8')
 		]);
 		this.body = tb('body', content);
-		this.document = '<!DOCTYPE html>' + tb('html', [
+	}
+
+	get document() {
+		return '<!DOCTYPE html>' + tb('html', [
 			this.head,
 			this.body
 		]);
@@ -38,9 +41,8 @@ class NodeDOM {
 	}
 
 	appendTo(tagMarkup, addition) {
-		return tagMarkup.replace(/<.*>(.[^<\/]*)<\/.*>/, function(match, content) {
-			const newContent = content + addition;
-
+		return tagMarkup.replace(/^<.*?>(.*)<\/.*>/, function(match, content) {
+			let newContent = content + addition;
 			return match.replace(content, newContent);
 		});
 	}
@@ -51,20 +53,22 @@ class NodeDOM {
 	}
 
 	appendToHead(addition) {
-		this.head = this.appendTo(this.head, addition);
+		const replacement = this.appendTo(this.head, addition);
+		this.head = replacement;
 		return void 0;
 	}
 	
 	addScript(url, async = false) {
-		this.appendToHead(tb(`script|src=${url}${async ? '|async=async' : ''}`));
+		const script = tb(`script|src=${url}${async ? '|async=async' : ''}`);
+		this.appendToHead(script);
 		return void 0;
 	}
 	
 	addStylesheet(url) {
-		this.appendToHead(tb(`link|rel=stylesheet|type=text/css|href=${url}`));
+		const link = tb(`link|rel=stylesheet|type=text/css|href=${url}`);
+		this.appendToHead(link);
 		return void 0;
 	}
-	
 
 }
 
